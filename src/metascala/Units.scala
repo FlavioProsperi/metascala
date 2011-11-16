@@ -30,8 +30,15 @@ object Units {
     type This = Quantity[M, KG, S, A, K, Mol, CD]
     def +(m : This) = Quantity[M, KG, S, A, K, Mol, CD](value + m.value)
     def -(m : This) = Quantity[M, KG, S, A, K, Mol, CD](value - m.value)
-    def *[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m : Quantity[M2, KG2, S2, A2, K2, Mol2, CD2]) = Quantity[M + M2, KG + KG2, S + S2, A + A2, K + K2, Mol + Mol2, CD + CD2](value * m.value)
-    def /[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m : Quantity[M2, KG2, S2, A2, K2, Mol2, CD2]) = Quantity[M - M2, KG - KG2, S - S2, A - A2, K - K2, Mol - Mol2, CD - CD2](value * m.value)
+    
+    def *[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](
+        m : Quantity[M2, KG2, S2, A2, K2, Mol2, CD2]) = 
+          Quantity[M + M2, KG + KG2, S + S2, A + A2, K + K2, Mol + Mol2, CD + CD2](value * m.value)
+    
+    def /[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](
+        m : Quantity[M2, KG2, S2, A2, K2, Mol2, CD2]) = 
+          Quantity[M - M2, KG - KG2, S - S2, A - A2, K - K2, Mol - Mol2, CD - CD2](value / m.value)
+    
     def apply(v : Double) = Quantity[M, KG, S, A, K, Mol, CD](v * value)
   }
   

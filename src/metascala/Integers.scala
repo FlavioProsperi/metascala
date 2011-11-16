@@ -22,6 +22,7 @@ object Integers {
     type Neg <: MInt
     type Succ <: MInt
     type Pre <: MInt
+    type Sub[I <: MInt] <: MInt
   }
   
   sealed trait Nat extends MInt {
@@ -35,6 +36,7 @@ object Integers {
     type Neg = _0
     type Succ = MSucc[_0]
     type Pre = Succ#Neg
+    type Sub[I <: MInt] = I#Neg
   }
   
   sealed trait Pos extends Nat
@@ -46,6 +48,7 @@ object Integers {
     type Neg = MNeg[This]
     type Pre = P
     type Succ = MSucc[This]
+    type Sub[I <: MInt] = Add[I#Neg]
   }
   
   final class MNeg[N <: Pos] extends MInt {
@@ -54,6 +57,7 @@ object Integers {
     type Neg = N
     type Succ = N#Pre#Neg
     type Pre = N#Succ#Neg
+    type Sub[I <: MInt] = Add[I#Neg]
   }
   
   type _1 = MSucc[_0]
